@@ -1,4 +1,3 @@
-package vast;
 import java.util.*;
 import java.util.Scanner;
 import java.util.HashMap;
