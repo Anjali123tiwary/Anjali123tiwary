@@ -1,7 +1,8 @@
-package edu.disease.asn1;
+package edu.disease.asn3;
 import java.util.UUID;
+import java.io.Serializable;
 import java.time.LocalDateTime;
-public class Exposure {
+public class Exposure implements Serializable {
 	String exposureType;
 	UUID patientId;
 	LocalDateTime dateTime;
@@ -41,8 +42,6 @@ public class Exposure {
 	}
 	public Exposure(UUID patientId) {
 		this.patientId=patientId;
-		this.dateTime=dateTime;
-		this.exposureType=exposureType;
 	}
 	public UUID getPatientId() {
 		return patientId;
@@ -68,8 +67,8 @@ public class Exposure {
 			throw new IllegalArgumentException();
 		}
 	}
-
 }
 	
 	
+
 

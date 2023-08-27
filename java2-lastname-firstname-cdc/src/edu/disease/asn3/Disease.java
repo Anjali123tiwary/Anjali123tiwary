@@ -1,7 +1,8 @@
-package edu.disease.asn2;
+package edu.disease.asn3;
 
+import java.io.Serializable;
 import java.util.UUID;
-public abstract class Disease  {
+public abstract class Disease implements Serializable {
 UUID diseaseId;
 String name;
 
@@ -63,4 +64,5 @@ public String toString() {
 public abstract String[] getExamples();
 
 }
+
 

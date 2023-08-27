@@ -1,18 +1,17 @@
 package edu.disease.asn1;
 import java.util.UUID;
 public class Disease {
-UUID diseaseId;
+UUID patientId;
 String name;
-
 	public UUID getPatientId() {
-	return diseaseId;
+	return patientId;
 }
 /**
  * 
  * @param patientId
  */
-public void setPatientId(UUID diseaseId) {
-	this.diseaseId = diseaseId;
+public void setPatientId(UUID patientId) {
+	this.patientId = patientId;
 }
 
 public String getName() {
@@ -27,7 +26,7 @@ public void setName(String name) {
 public int hashCode() {
 	final int prime = 31;
 	int result = 1;
-	result = prime * result + ((diseaseId == null) ? 0 : diseaseId.hashCode());
+	result = prime * result + ((patientId == null) ? 0 : patientId.hashCode());
 	return result;
 }
 
@@ -40,17 +39,17 @@ public boolean equals(Object obj) {
 	if (getClass() != obj.getClass())
 		return false;
 	Disease other = (Disease) obj;
-	if (diseaseId == null) {
-		if (other.diseaseId != null)
+	if (patientId == null) {
+		if (other.patientId != null)
 			return false;
-	} else if (!diseaseId.equals(other.diseaseId))
+	} else if (!patientId.equals(other.patientId))
 		return false;
 	return true;
 }
 
 @Override
 public String toString() {
-	return "Disease [patientId=" + diseaseId + ", name=" + name + "]";
+	return "Disease [patientId=" + patientId + ", name=" + name + "]";
 }
 
 
