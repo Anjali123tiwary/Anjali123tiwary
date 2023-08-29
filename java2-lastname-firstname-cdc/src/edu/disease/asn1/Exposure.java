@@ -41,8 +41,6 @@ public class Exposure {
 	}
 	public Exposure(UUID patientId) {
 		this.patientId=patientId;
-		this.dateTime=dateTime;
-		this.exposureType=exposureType;
 	}
 	public UUID getPatientId() {
 		return patientId;
@@ -68,7 +66,6 @@ public class Exposure {
 			throw new IllegalArgumentException();
 		}
 	}
-
 }
 	
 	

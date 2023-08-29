@@ -1,9 +1,8 @@
 package edu.disease.asn3;
-
 import java.io.Serializable;
 import java.util.UUID;
 public abstract class Disease implements Serializable {
-UUID diseaseId;
+public UUID diseaseId;
 String name;
 
 	public UUID getPatientId() {

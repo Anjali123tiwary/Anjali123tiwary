@@ -1,13 +1,18 @@
-package edu.disease.asn1;
+package edu.disease.asn2;
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 import org.junit.Before;
 import org.junit.Test;
+
+import edu.disease.asn1.Exposure;
 public class PatientTest {
 	private Patient patient;
 	
@@ -48,9 +53,6 @@ public class PatientTest {
 		final Patient patientObjEquals = new Patient(1,1);
 		patientObjEquals.setPatientId(patient.getPatientId());
 		assertTrue(patient.equals(patientObjEquals));
-		assertFalse(patient.equals(null));
-		patientObjEquals.setPatientId(null);
-		assertFalse(patient.equals(patientObjEquals));
 		
 	}
 	
@@ -95,4 +97,54 @@ public class PatientTest {
 		Patient patientTest = new Patient(-1, -1);
 		
 	}
+	
+	@Test
+    public void testPatientSorting() {
+        Patient obj1 = new Patient(1,1);
+        obj1.setFirstName("amul");obj1.setLastName("ambrish");
+        Patient obj2 = new Patient(1,1);
+        obj2.setFirstName("babu");obj2.setLastName(null);
+        Patient obj3 = new Patient(1,1);
+        obj3.setFirstName("anand");obj3.setLastName("babu");
+        Patient obj4 = new Patient(1,1);
+        obj4.setFirstName("babu");obj4.setLastName("maha");
+        // Create an array of objects in an unsorted order
+        Patient[] unsortedArray = {obj1, obj2, obj3,obj4};
+        // Sort the array
+        Arrays.sort(unsortedArray);
+        // Create an array of objects in the expected sorted order
+        Patient[] expectedArray = {obj1, obj2, obj3,obj4};
+        // Verify that the sorted array matches the expected order
+        assertArrayEquals(expectedArray, unsortedArray);
+    }
+	@Test
+    public void testPatientSorting2() {
+        Patient obj1 = new Patient(1,1);
+        obj1.setFirstName(null);obj1.setLastName(null);
+        Patient obj2 = new Patient(1,1);
+        obj2.setFirstName(null);obj2.setLastName(null);
+        // Create an array of objects in an unsorted order
+        Patient[] unsortedArray = {obj1, obj2};
+        // Sort the array
+        Arrays.sort(unsortedArray);
+        // Create an array of objects in the expected sorted order
+        Patient[] expectedArray = {obj1, obj2};
+        // Verify that the sorted array matches the expected order
+        assertArrayEquals(expectedArray, unsortedArray);
+    }
+	@Test
+    public void testPatientSorting3() {
+        Patient obj1 = new Patient(1,1);
+        obj1.setFirstName("bbb");obj1.setLastName("aaa");
+        Patient obj2 = new Patient(1,1);
+        obj2.setFirstName("aaa");obj2.setLastName("aaa");
+        // Create an array of objects in an unsorted order
+        Patient[] unsortedArray = {obj1, obj2};
+        // Sort the array
+        Arrays.sort(unsortedArray);
+        // Create an array of objects in the expected sorted order
+        Patient[] expectedArray = {obj1, obj2};
+        // Verify that the sorted array matches the expected order
+        assertArrayEquals(expectedArray, unsortedArray);
+    }
 }

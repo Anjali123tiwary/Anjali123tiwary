@@ -1,12 +1,14 @@
 package edu.disease.asn2;
 
-public class InfectiousDisease extends Disease{
+import java.io.Serializable;
+
+public class InfectiousDisease extends Disease  implements Serializable{
 
 	@Override
 	public String[] getExamples() {
-		String IndiseaseName[]= {"bacteria","viruses","fungi","parasites"};
-		
-		  return IndiseaseName;
-	}
-}
+		String[] DiseasesName = { "bacteria", "viruses", "fungi", "parasites" };
+		return DiseasesName;
 
+	}
+
+}

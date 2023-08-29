@@ -1,7 +1,9 @@
-package edu.disease.asn3;
+package edu.disease.asn6;
 
+
+import java.util.List;
 import java.util.UUID;
-
+import edu.disease.asn3.Disease;
 import edu.disease.asn3.Exposure;
 
 public interface DiseaseControlManager {
@@ -11,7 +13,8 @@ public interface DiseaseControlManager {
 		 Patient getPatient(UUID patientId);
 		 void addDiseaseToPatient(UUID patientId,UUID diseaseId);
 		 void addExposureToPatient(UUID patientId,Exposure exposure);
-		 Disease[] getDiseases();
-		 Patient[] getPatient();
+		 List<Disease> getDiseases();
+		 List<Patient> getPatient();
 		
 }
+

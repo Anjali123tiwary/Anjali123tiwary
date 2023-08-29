@@ -1,9 +1,9 @@
 package edu.disease.asn2;
-
 import java.util.Arrays;
 import java.util.UUID;
+
 import edu.disease.asn1.Exposure;
-public class Patient implements Comparable<Patient> {
+public class Patient implements Comparable <Patient>{
 	UUID patientId;
 	String firstName;
 	String LastName;
@@ -107,12 +107,20 @@ public class Patient implements Comparable<Patient> {
 
 	@Override
 	public int compareTo(Patient o) {
-		if(o.LastName.compareToIgnoreCase(this.LastName)==0) {
+		int lastComparison=o.LastName.compareToIgnoreCase(this.LastName);
+		if(lastComparison==0) {
 			return o.firstName.compareToIgnoreCase(this.firstName);
 		}
 		else {
-			return o.LastName.compareToIgnoreCase(this.LastName);
+			return lastComparison;
 		}
+		
 	}
+
+	
+
 }
- 
+
+	
+
+

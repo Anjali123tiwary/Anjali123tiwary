@@ -1,22 +1,25 @@
-package edu.disease.asn3;
+package edu.disease.asn6;
 import edu.disease.asn3.Disease;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import edu.disease.asn3.Exposure;
 
 public class DiseaseControlManagerImpl implements DiseaseControlManager{
-	private Disease[] disease ;
-	private Patient[] patients;
+	private List<Disease> disease ;
+	private List<Patient> patients;
 	int i=0;
 		public DiseaseControlManagerImpl(int maxDisease,int maxPatient) {
 			if(maxDisease>0) {
-				disease=new Disease[maxDisease];
+				disease=new ArrayList<>(maxDisease);
 				
 			}
 			else {
 				throw new IllegalArgumentException("Invalid maxDisease");
 			}
 			if(maxPatient>0) {
-				patients=new Patient[maxPatient];
+				patients=new ArrayList<Patient>(maxPatient);
 			}
 			else {
 				throw new IllegalArgumentException("Invalid maxPatient");
@@ -24,7 +27,7 @@ public class DiseaseControlManagerImpl implements DiseaseControlManager{
 		}
 		@Override
 		public Disease addDisease(String name, boolean infectious) {
-			if(i<disease.length) {
+			if(i<disease.size()) {
 				if(infectious==true) {
 					disease[i++]=new InfectiousDisease();
 					return disease[i];
@@ -41,19 +44,19 @@ public class DiseaseControlManagerImpl implements DiseaseControlManager{
 		}
 		@Override
 		public Disease getDisease(UUID diseaseId) {
-			for (int i = 0; i < disease.length; i++) {
-				if(disease[i].getDiseaseId().equals(diseaseId)) {
-					return disease[i];
+			for (int i = 0; i < disease.size(); i++) {
+				if(disease.get(i).getDiseaseId().equals(diseaseId)) {
+					return (Disease) disease;
 				}
 			}
 			return null;
 		}
 		@Override
 		public Patient addPatient(String firstName, String lastName, int maxDiseases, int maxExposures) {
-			if(i<patients.length) {
-				patients[i]=new Patient(maxDiseases, maxExposures);
-				patients[i].setFirstName(firstName);
-				patients[i].setLastName(lastName);
+			if(i<patients.size()) {
+				patients=(List<Patient>) new Patient(maxDiseases, maxExposures);
+				patients.setFirstName(i, firstName);
+				patients[i].setLastName(i,lastName);
 				return patients[i++];
 			}
 			else {
@@ -63,10 +66,9 @@ public class DiseaseControlManagerImpl implements DiseaseControlManager{
 		}
 		@Override
 		public Patient getPatient(UUID patientId) {
-			Patient p1=null;
-			for (int i = 0; i < patients.length ; i++) {
-				if ((patients[i].patientId).equals(patientId)) {
-					return patients[i];
+			for (int i = 0; i < patients.size() ; i++) {
+				if ((patients.get(i).patientId).equals(patientId)) {
+					return (Patient) patients;
 				}
 			}
 		return null;
@@ -75,39 +77,40 @@ public class DiseaseControlManagerImpl implements DiseaseControlManager{
 		@Override
 		public void addDiseaseToPatient(UUID patientId, UUID diseaseId) {
 			
-			for(int i=0;i<patients.length;i++) {
+			for(int i=0;i<patients.size();i++) {
 				
-				if(!patients[i].patientId.equals(patientId)) {
+				if(!patients.get(i).patientId.equals(patientId)) {
 					throw new IllegalArgumentException("Not Found");
 				}
 			}
 			
-			for(int i=0;i<disease.length;i++) {
-				if(!disease[i].diseaseId.equals(diseaseId)) {
+			for(int i=0;i<disease.size();i++) {
+				if(!disease.get(i).diseaseId.equals(diseaseId)) {
 					throw new IllegalArgumentException("Not Found");
 				}
 				else {
-					patients[i].addDiseaseId(diseaseId);
+					patients.get(i).addDiseaseId(diseaseId);
 				}
 			}
 		}
 		
 		@Override
-		public Disease[] getDiseases() {
+		public List<Disease>getDiseases() {
 			return this.disease;
 		}
 		@Override
-		public Patient[] getPatient() {
+		public List<Patient> getPatient() {
 		return this.patients;
 		}
 		@Override
 		public void addExposureToPatient(UUID patientId, Exposure exposure) {
-			for(int i=0;i<patients.length;i++) {
-				if(!patients[i].patientId.equals(patientId)) {
+			for(int i=0;i<patients.size();i++) {
+				if(!patients.get(i).patientId.equals(patientId)) {
 					throw new IllegalArgumentException("Not Found");
 				}
 				else {
-					patients[i].addExposure(exposure);
+					patients.get(i).addExposure(exposure);
+					
 				}
 			}
 			

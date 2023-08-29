@@ -73,12 +73,31 @@ public class DiseaseControlManagerImpl implements DiseaseControlManager{
 		}
 		@Override
 		public void addDiseaseToPatient(UUID patientId, UUID diseaseId) {
+			for(int i=0;i<patients.length;i++) {
+				if(!patients[i].patientId.equals(patientId)) {
+					throw new IllegalArgumentException("Not Found");
+				}
+			}
 			
-			
+			for(int i=0;i<disease.length;i++) {
+				if(!disease[i].diseaseId.equals(diseaseId)) {
+					throw new IllegalArgumentException("Not Found");
+				}
+				else {
+					patients[i].addDiseaseId(diseaseId);
+				}
+			}
 		}
 		@Override
 		public void addExposureToPatient(UUID patientId, Exposure exposure) {
-			
+			for(int i=0;i<patients.length;i++) {
+				if(!patients[i].patientId.equals(patientId)) {
+					throw new IllegalArgumentException("Not Found");
+				}
+				else {
+					patients[i].addExposure(exposure);
+				}
+			}
 			
 		}
 }

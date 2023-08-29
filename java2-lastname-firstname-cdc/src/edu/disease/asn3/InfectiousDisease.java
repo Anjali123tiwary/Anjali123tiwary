@@ -1,6 +1,5 @@
 package edu.disease.asn3;
 
-
 import java.io.Serializable;
 
 import edu.disease.asn3.Disease;

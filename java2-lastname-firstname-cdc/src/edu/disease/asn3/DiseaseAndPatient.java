@@ -1,5 +1,6 @@
 package edu.disease.asn3;
 
+
 public class DiseaseAndPatient {
 	private Disease[]diseases;
 	private Patient[]patients;

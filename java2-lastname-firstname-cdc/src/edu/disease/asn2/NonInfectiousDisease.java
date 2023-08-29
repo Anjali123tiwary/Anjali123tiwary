@@ -1,12 +1,13 @@
 package edu.disease.asn2;
 
-public class NonInfectiousDisease extends Disease{
+import java.io.Serializable;
+
+public class NonInfectiousDisease extends Disease implements Serializable{
 
 	@Override
 	public String[] getExamples() {
-		String NondiseaseName[]= {"Diabetes","cancers","Injuries","Mental health"};
-		
-			return NondiseaseName;
+		String[] DiseasesName= {"Diabetes","cancers","respiratory","Mental health"};
+		return DiseasesName;
 	}
 
 }
