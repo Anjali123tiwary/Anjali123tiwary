@@ -1,5 +1,6 @@
 package edu.disease.asn3;
 
+import java.util.List;
 import java.util.UUID;
 
 import edu.disease.asn3.Exposure;

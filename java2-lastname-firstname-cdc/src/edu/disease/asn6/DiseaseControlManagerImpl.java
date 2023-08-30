@@ -1,11 +1,11 @@
 package edu.disease.asn6;
 import edu.disease.asn3.Disease;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import edu.disease.asn3.Exposure;
-
+import edu.disease.asn3.InfectiousDisease;
+import edu.disease.asn3.NonInfectiousDisease;
 public class DiseaseControlManagerImpl implements DiseaseControlManager{
 	private List<Disease> disease ;
 	private List<Patient> patients;
@@ -19,7 +19,7 @@ public class DiseaseControlManagerImpl implements DiseaseControlManager{
 				throw new IllegalArgumentException("Invalid maxDisease");
 			}
 			if(maxPatient>0) {
-				patients=new ArrayList<Patient>(maxPatient);
+				patients=new ArrayList<>(maxPatient);
 			}
 			else {
 				throw new IllegalArgumentException("Invalid maxPatient");
@@ -27,75 +27,80 @@ public class DiseaseControlManagerImpl implements DiseaseControlManager{
 		}
 		@Override
 		public Disease addDisease(String name, boolean infectious) {
-			if(i<disease.size()) {
 				if(infectious==true) {
-					disease[i++]=new InfectiousDisease();
-					return disease[i];
+					Disease d=new InfectiousDisease();
+					return disease.get(i);
 				}
 				else {
-					disease[i++]=new NonInfectiousDisease();
-					return disease[i];
+					Disease d1=new NonInfectiousDisease();
+					return disease.get(i);
 				}
-			}
-			else {
-				throw new IllegalArgumentException("Limit reached");
-			}
+			
 			
 		}
 		@Override
 		public Disease getDisease(UUID diseaseId) {
 			for (int i = 0; i < disease.size(); i++) {
 				if(disease.get(i).getDiseaseId().equals(diseaseId)) {
-					return (Disease) disease;
+					return disease.get(i);
 				}
 			}
 			return null;
 		}
 		@Override
 		public Patient addPatient(String firstName, String lastName, int maxDiseases, int maxExposures) {
-			if(i<patients.size()) {
-				patients=(List<Patient>) new Patient(maxDiseases, maxExposures);
-				patients.setFirstName(i, firstName);
-				patients[i].setLastName(i,lastName);
-				return patients[i++];
-			}
-			else {
-				throw new IllegalArgumentException("Limit reached");
-			}
+				Patient p=new Patient(maxDiseases, maxExposures);
+				p.setFirstName(firstName);
+				p.setLastName(lastName);
+				return p;
+	
 		
 		}
 		@Override
 		public Patient getPatient(UUID patientId) {
-			for (int i = 0; i < patients.size() ; i++) {
-				if ((patients.get(i).patientId).equals(patientId)) {
-					return (Patient) patients;
+			
+			Patient p=null;
+				if ((p.patientId).equals(patientId)) {
+					return p;
 				}
-			}
+			
 		return null;
 			}
 			
 		@Override
 		public void addDiseaseToPatient(UUID patientId, UUID diseaseId) {
-			
-			for(int i=0;i<patients.size();i++) {
+			int d=0,p=0;
+			Patient c=null;
+			Disease ds=null;
+			for(Patient p1:patients) {
 				
-				if(!patients.get(i).patientId.equals(patientId)) {
-					throw new IllegalArgumentException("Not Found");
+				if(p1.getPatientId().equals(patientId)) {
+					p=1;
+					c=p1;
+					break;
 				}
 			}
 			
-			for(int i=0;i<disease.size();i++) {
-				if(!disease.get(i).diseaseId.equals(diseaseId)) {
-					throw new IllegalArgumentException("Not Found");
+			for(Disease df:disease)
+			{
+				if(df.getDiseaseId().equals(diseaseId))
+				{
+					ds=df;
+					d=1;
+					break;
 				}
-				else {
-					patients.get(i).addDiseaseId(diseaseId);
-				}
+			}
+			if(p==1&&d==1)
+			{
+				c.addDiseaseId(ds.getDiseaseId());
+			}
+			else {
+				throw new IllegalArgumentException();
 			}
 		}
 		
 		@Override
-		public List<Disease>getDiseases() {
+		public List<Disease> getDiseases() {
 			return this.disease;
 		}
 		@Override
@@ -104,14 +109,23 @@ public class DiseaseControlManagerImpl implements DiseaseControlManager{
 		}
 		@Override
 		public void addExposureToPatient(UUID patientId, Exposure exposure) {
-			for(int i=0;i<patients.size();i++) {
-				if(!patients.get(i).patientId.equals(patientId)) {
-					throw new IllegalArgumentException("Not Found");
+			int p=0;
+			Patient c=null;
+			for(Patient p1:patients) {
+				
+				if(p1.getPatientId().equals(patientId)) {
+					p=1;
+					c=p1;
+					break;
 				}
-				else {
-					patients.get(i).addExposure(exposure);
-					
-				}
+			}
+			
+			if(p==1)
+			{
+				c.addExposure(exposure);
+			}
+			else {
+				throw new IllegalArgumentException();
 			}
 			
 		}
