@@ -30,11 +30,11 @@ public class CustomerDAOImpl implements CustomerDAO,Cloneable{
 		
 		
 	}
-	private CustomerDAOImpl() {
+	public CustomerDAOImpl() {
 //		ConnectionUtility.url="jdbc:mysql://localhost:3306/vastpro";
 //		ConnectionUtility.username="root";
 //		ConnectionUtility.password="root";
-		System.out.println("customer dao impl object created...");
+		System.out.println("customers dao impl object created...");
 	}
 	
 	private static CustomerDAOImpl cs;
@@ -61,7 +61,7 @@ public class CustomerDAOImpl implements CustomerDAO,Cloneable{
 		PreparedStatement ps;
 		try {
 			Connection con=ConnectionUtility.getConnection();
-			ps=con.prepareStatement("select * from customer where cust_id=?");
+			ps=con.prepareStatement("select * from customers where cust_id=?");
 			ps.setInt(1, uid);
 			ResultSet rs=ps.executeQuery();
 			CustomerDTO dto=new CustomerDTO();
@@ -84,7 +84,7 @@ public class CustomerDAOImpl implements CustomerDAO,Cloneable{
 		PreparedStatement ps;
 		try {
 			Connection con=ConnectionUtility.getConnection();
-			ps=con.prepareStatement("select * from customer");
+			ps=con.prepareStatement("select * from customers");
 			
 			ResultSet rs=ps.executeQuery();
 			List<CustomerDTO> list=new ArrayList<CustomerDTO>();
@@ -109,7 +109,7 @@ public class CustomerDAOImpl implements CustomerDAO,Cloneable{
 		PreparedStatement ps;
 		try {
 			Connection con=ConnectionUtility.getConnection();
-			ps=con.prepareStatement("select * from customer where cust_name=?");
+			ps=con.prepareStatement("select * from customers where cust_name=?");
 			ps.setString(1, customerName);
 			ResultSet rs=ps.executeQuery();
 			CustomerDTO dto=new CustomerDTO();
@@ -136,7 +136,7 @@ public class CustomerDAOImpl implements CustomerDAO,Cloneable{
 		PreparedStatement ps;
 		try {
 			Connection con=ConnectionUtility.getConnection();
-			ps=con.prepareStatement("insert into customer values (?,?,?,?)");
+			ps=con.prepareStatement("insert into customers values (?,?,?,?)");
 			ps.setInt(1, dto.getCust_id());
 			ps.setString(2, dto.getCust_name());
 			ps.setString(3, dto.getCust_pwd());
@@ -155,11 +155,11 @@ public class CustomerDAOImpl implements CustomerDAO,Cloneable{
 		PreparedStatement ps;
 		try {
 			Connection con=ConnectionUtility.getConnection();
-			ps=con.prepareStatement("select * from customer where cust_id=?");
+			ps=con.prepareStatement("select * from customers where cust_id=?");
 			ps.setInt(1, dto.getCust_id());
 			ResultSet rs=ps.executeQuery();
 			if(rs.next()) {
-				ps=con.prepareStatement("update customer set cust_name=?, cust_pwd=?, flag=? where cust_id=?");
+				ps=con.prepareStatement("update customers set cust_name=?, cust_pwd=?, flag=? where cust_id=?");
 				ps.setString(1, dto.getCust_name());
 				ps.setString(2, dto.getCust_pwd());
 				ps.setInt(3, dto.getFlag());
@@ -183,7 +183,7 @@ public class CustomerDAOImpl implements CustomerDAO,Cloneable{
 		PreparedStatement ps;
 		try {
 			Connection con=ConnectionUtility.getConnection();
-			ps=con.prepareStatement("delete from customer where cust_id=?");
+			ps=con.prepareStatement("delete from customers where cust_id=?");
 			ps.setInt(1, dto.getCust_id());
 			ps.executeUpdate();
 			ConnectionUtility.closeConnection(null, null);
